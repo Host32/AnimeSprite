@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Anime Frame</title>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+</head>
+<script type="text/javascript" src="JS/jquery.js"></script>
+<script type="text/javascript" src="JS/anime.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var animate;
+		var animacao = new anime(
+			{
+				patch : 'Imagens/default_char.png',
+				frameWidth : 32,
+				frameHeight: 33.3,
+				animacoes: 5,
+				framesPorAnimacao: 6,
+				container: '#animacao',
+				classe : 'animacao',
+				id     : 'persoAnimado',
+				tempoPorFrame: 100
+			}
+		);
+		
+		animacao.append();
+		$("#start").on("click",function(){
+			clearInterval(animate);
+			animate = setInterval(function(){
+				animacao.updateFrame();
+				animeUpdateFrame(animacao);
+			},animacao.options.tempoPorFrame);
+		});
+		$("#pause").on("click",function(){
+			clearInterval(animate);
+		});
+		$("#stop").on("click",function(){
+			clearInterval(animate);
+			animacao.stop();
+			animeUpdateFrame(animacao);
+		});
+		$("#esq").on("click",function(){
+			animacao.setAnimacao(2);
+		});
+		$("#up").on("click",function(){
+			animacao.setAnimacao(3);
+		});
+		$("#down").on("click",function(){
+			animacao.setAnimacao(1);
+		});
+		$("#dir").on("click",function(){
+			animacao.setAnimacao(2,true);
+		});
+		$("#downdir").on("click",function(){
+			animacao.setAnimacao(4,true);
+		});
+		$("#downesq").on("click",function(){
+			animacao.setAnimacao(4);
+		});
+		$("#updir").on("click",function(){
+			animacao.setAnimacao(5,true);
+		});
+		$("#upesq").on("click",function(){
+			animacao.setAnimacao(5);
+		});
+	});
+</script>
+<body>
+<div id="animacao">
+	
+</div>
+
+<div style="position: absolute;top:200px;">
+	<button id="start">Start</button>
+	<button id="pause">Pause</button>
+	<button id="stop">Stop</button>
+	<button id="esq"><</button>
+	<button id="up">/\</button>
+	<button id="down">\/</button>
+	<button id="dir">></button>
+	<button id="downdir">_/</button>
+	<button id="downesq">\_</button>
+	<button id="upesq">/-</button>
+	<button id="updir">-\</button>
+</div>
+</body>
+</html>
